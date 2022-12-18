@@ -969,3 +969,17 @@ b2 = Book("War and Peace", "Leo Tolstoy", 1225, 39.95)
 b3 = Book("The Cather in the Rye", "JD Salinger", 234, 29.95)
 
 print(b1)
+
+from dataclasses import dataclass
+
+
+# the "frozen" parameter makes the class immutable
+@dataclass(frozen=True)
+class ImmutableClass:
+    value1: str = "Value 1"
+    value2: int = 0
+
+
+obj = ImmutableClass()
+print(obj.value1)
+# obj.value1 = "Another Value" throws error
