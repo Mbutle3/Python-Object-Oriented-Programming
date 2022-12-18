@@ -911,5 +911,61 @@ class Book:
 
 
 print("-----------------------------------------------------------------------")
-book1.price = 38.95
-print(book1)
+print("                             chapter 4: Data Classes")
+print("Cleaner Way Of Creating Classes Req-Python 3 and up")
+from dataclasses import dataclass
+
+
+@dataclass
+class Book:
+    title: str
+    author: str
+    pages: int
+    price: float
+
+    def book_info(self):
+        return f"{self.title}, by {self.author}"
+
+    # add additional attributes
+    def __post_init__(self):
+        self.description = f"{self.title}, by {self.author}, {self.pages} pages"
+
+
+Book1 = Book("War and Peace", "Leo Tolstoy", 1225, 39.95)
+Book2 = Book("The Cather in the Rye", "JD Salinger", 234, 29.95)
+Book3 = Book("War and Peace", "Leo Tolstoy", 1225, 39.95)
+
+print(book1.title)
+print(book2.author)
+print(Book1 == Book3)
+print(Book1 == Book2)
+print(Book1.book_info())
+Book1.title = "Anna Karenina"
+Book1.pages = 864
+print(Book1.book_info())
+print(Book1.description)
+print(Book2.description)
+print(Book2.description)
+
+from dataclasses import dataclass, field
+import random
+
+
+def price_func():
+    return float(random.randrange(20, 40))
+
+
+@dataclass
+class DefaultBook:
+    title: str = "No Title"
+    author: str = "No author"
+    pages: int = 0
+    # price: float = field(default=10)
+    price: float = field(default_factory=price_func)
+
+
+b1 = DefaultBook()
+b2 = Book("War and Peace", "Leo Tolstoy", 1225, 39.95)
+b3 = Book("The Cather in the Rye", "JD Salinger", 234, 29.95)
+
+print(b1)
